@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "lumina",
+      "type": "registry:theme",
+      "title": "Lumina Theme",
+      "description": "Crextio design tokens — merge into your Tailwind CSS file",
+      "files": [
+        {
+          "path": "lumina.css",
+          "type": "registry:theme"
+        }
+      ]
+    }
+  ]
+}

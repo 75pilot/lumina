@@ -19,9 +19,29 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/ui/*": ["./registry/lumina/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "hooks/**/*.ts",
+    "hooks/**/*.tsx",
+    "lib/**/*.ts",
+    "registry/lumina/blocks/navbar.tsx",
+    "registry/lumina/blocks/welcome-kpi.tsx",
+    "registry/lumina/blocks/progress-card.tsx",
+    "registry/lumina/ui/button.tsx",
+    "registry/lumina/ui/card.tsx",
+    "registry/lumina/ui/kpi-pill.tsx",
+    "registry/lumina/ui/menu-shortcut.tsx",
+    "registry/lumina/ui/stat-figure.tsx",
+    "registry/lumina/ui/sheet.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

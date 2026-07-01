@@ -1,0 +1,208 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "navbar",
+      "type": "registry:block",
+      "title": "Navbar",
+      "files": [
+        {
+          "path": "navbar.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "sheet"
+      ]
+    },
+    {
+      "name": "settings-menu",
+      "type": "registry:block",
+      "title": "Settings Menu",
+      "files": [
+        {
+          "path": "settings-menu.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "dropdown-menu",
+        "badge",
+        "menu-shortcut"
+      ]
+    },
+    {
+      "name": "notifications-popover",
+      "type": "registry:block",
+      "title": "Notifications Popover",
+      "files": [
+        {
+          "path": "notifications-popover.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "popover",
+        "separator",
+        "scroll-area",
+        "badge"
+      ]
+    },
+    {
+      "name": "profile-menu",
+      "type": "registry:block",
+      "title": "Profile Menu",
+      "files": [
+        {
+          "path": "profile-menu.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "dropdown-menu",
+        "avatar",
+        "badge",
+        "menu-shortcut"
+      ]
+    },
+    {
+      "name": "welcome-kpi",
+      "type": "registry:block",
+      "title": "Welcome Kpi",
+      "files": [
+        {
+          "path": "welcome-kpi.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "kpi-pill",
+        "stat-figure"
+      ]
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:block",
+      "title": "Profile Card",
+      "files": [
+        {
+          "path": "profile-card.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card"
+      ]
+    },
+    {
+      "name": "progress-card",
+      "type": "registry:block",
+      "title": "Progress Card",
+      "files": [
+        {
+          "path": "progress-card.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card",
+        "button"
+      ]
+    },
+    {
+      "name": "time-tracker-card",
+      "type": "registry:block",
+      "title": "Time Tracker Card",
+      "files": [
+        {
+          "path": "time-tracker-card.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card",
+        "button"
+      ]
+    },
+    {
+      "name": "onboarding-progress",
+      "type": "registry:block",
+      "title": "Onboarding Progress",
+      "files": [
+        {
+          "path": "onboarding-progress.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card"
+      ]
+    },
+    {
+      "name": "onboarding-task-panel",
+      "type": "registry:block",
+      "title": "Onboarding Task Panel",
+      "files": [
+        {
+          "path": "onboarding-task-panel.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card",
+        "button"
+      ]
+    },
+    {
+      "name": "sidebar-accordion",
+      "type": "registry:block",
+      "title": "Sidebar Accordion",
+      "files": [
+        {
+          "path": "sidebar-accordion.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card",
+        "accordion"
+      ]
+    },
+    {
+      "name": "calendar-card",
+      "type": "registry:block",
+      "title": "Calendar Card",
+      "files": [
+        {
+          "path": "calendar-card.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": [
+        "utils",
+        "card",
+        "button",
+        "popover",
+        "dialog",
+        "input",
+        "label",
+        "avatar-stack"
+      ]
+    }
+  ]
+}

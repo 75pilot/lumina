@@ -1,23 +1,46 @@
-# registry-template
+# Lumina Registry
 
-You can use the `shadcn` CLI to run your own component registry. Running your own
-component registry allows you to distribute your custom components, hooks, pages, and
-other files to any React project.
+Crextio-themed [shadcn/ui](https://ui.shadcn.com) component registry. Components are built to static JSON files and served from `public/r/`.
 
-> [!IMPORTANT]  
-> This template uses Tailwind v4. For Tailwind v3, see [registry-template-v3](https://github.com/shadcn-ui/registry-template-v3).
+## Quick start (consumers)
 
-## Getting Started
+```bash
+npx shadcn@latest add https://<your-domain>/r/lumina.json
+npx shadcn@latest add https://<your-domain>/r/button.json
+npx shadcn@latest add https://<your-domain>/r/navbar.json
+```
 
-This is a template for creating a custom registry using Next.js.
+See [docs/lumina/installation.md](docs/lumina/installation.md) for the full guide.
 
-- The template uses a `registry.json` file to define components and their files.
-- The `shadcn build` command is used to build the registry.
-- The registry items are served as static files under `public/r/[name].json`.
-- The template also includes a route handler for serving registry items.
-- Every registry item are compatible with the `shadcn` CLI.
-- We have also added v0 integration using the `Open in v0` api.
+## Structure
 
-## Documentation
+```
+registry/
+  lumina/
+    theme/lumina.css   # Theme tokens (registry:theme)
+    lib/utils.ts       # cn() helper
+    ui/                # 50+ themed shadcn components
+    blocks/            # 12 dashboard blocks
+registry.json          # Merged manifest for shadcn build
+public/r/              # Built registry JSON (generated)
+```
 
-Visit the [shadcn documentation](https://ui.shadcn.com/docs/registry) to view the full documentation.
+## Develop
+
+```bash
+pnpm install
+pnpm registry:sync      # Regenerate registry.json from source files
+pnpm registry:validate  # Validate via shadcn registry:build
+pnpm registry:build     # Build public/r/*.json
+pnpm dev                # Preview demo + served registry
+```
+
+## Tiers
+
+- **Base** — `button`, `badge`, `kpi-pill`, …
+- **Composite** — `card`, `dropdown-menu`, `popover`, …
+- **Blocks** — `navbar`, `progress-card`, `calendar-card`, …
+
+## License
+
+MIT

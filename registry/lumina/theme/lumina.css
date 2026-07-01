@@ -1,0 +1,163 @@
+/**
+ * Lumina theme — merge into your Tailwind CSS entry file (e.g. globals.css / styles.css).
+ * Requires Tailwind CSS v4 with @import "tailwindcss".
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand-yellow: var(--primary);
+  --color-brand-yellow-lt: var(--crextio-primary-light, var(--accent));
+  --color-brand-ink: var(--crextio-card-dark, #1c1c1c);
+  --color-brand-ink-soft: var(--crextio-ink-soft, #2e2e2e);
+  --color-shell-bg: var(--background);
+  --color-shell-card: var(--card);
+  --color-shell-warm: var(--crextio-shell-warm, #fdfaee);
+  --color-shell-warm-deep: var(--crextio-shell-warm-deep, #f7f0c8);
+  --color-card-dark: var(--crextio-card-dark, #1c1c1c);
+  --color-card-dark-foreground: var(--crextio-card-dark-foreground, #ffffff);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans", "Inter", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --shadow-card: var(--crextio-shadow-card, 0 1px 4px 0 rgba(0, 0, 0, 0.06));
+  --shadow-card-md: var(--crextio-shadow-card-md, 0 2px 12px 0 rgba(0, 0, 0, 0.08));
+  --shadow-card-dark: var(--crextio-shadow-card-dark, 0 4px 24px 0 rgba(0, 0, 0, 0.2));
+}
+
+:root {
+  --radius: 1rem;
+  --background: #ecedef;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #f5c842;
+  --primary-foreground: #1c1c1c;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #fdf3c0;
+  --accent-foreground: #1c1c1c;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e8e8e8;
+  --input: #e8e8e8;
+  --ring: #f5c842;
+
+  --crextio-shell-warm: #fdfaee;
+  --crextio-shell-warm-deep: #f7f0c8;
+  --crextio-card-dark: #1c1c1c;
+  --crextio-card-dark-foreground: #ffffff;
+  --crextio-primary-light: #fdf3c0;
+  --crextio-subtle-foreground: #a3a3a3;
+  --crextio-ink-soft: #2e2e2e;
+  --crextio-shadow-card: 0 1px 4px 0 rgba(0, 0, 0, 0.06);
+  --crextio-shadow-card-md: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
+  --crextio-shadow-card-dark: 0 4px 24px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  --background: #171717;
+  --foreground: #fafafa;
+  --card: #262626;
+  --card-foreground: #fafafa;
+  --popover: #262626;
+  --popover-foreground: #fafafa;
+  --secondary: #404040;
+  --secondary-foreground: #fafafa;
+  --muted: #404040;
+  --muted-foreground: #a3a3a3;
+  --border: #404040;
+  --input: #404040;
+  --crextio-card-dark: #0a0a0a;
+  --crextio-shell-warm: #262626;
+  --crextio-shell-warm-deep: #1c1c1c;
+}
+
+@utility shell-gradient {
+  background: radial-gradient(
+    ellipse 70% 80% at 75% 20%,
+    var(--crextio-shell-warm) 0%,
+    var(--crextio-shell-warm-deep) 35%,
+    var(--background) 80%
+  );
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes kpi-fill {
+  from {
+    width: 0%;
+  }
+}
+
+.animate-kpi-fill {
+  animation: kpi-fill 600ms ease-out;
+}
+
+@keyframes bar-rise {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-bar-rise {
+  transform-origin: bottom;
+  animation: bar-rise 300ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kpi-fill,
+  .animate-bar-rise {
+    animation: none !important;
+  }
+}

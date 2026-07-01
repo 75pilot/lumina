@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "menu-shortcut",
+  "type": "registry:ui",
+  "title": "Menu Shortcut",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/ui/menu-shortcut.tsx",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface MenuShortcutProps extends React.HTMLAttributes<HTMLElement> {\n  dark?: boolean;\n}\n\nfunction MenuShortcut({ className, dark = false, children, ...props }: MenuShortcutProps) {\n  return (\n    <kbd\n      className={cn(\n        \"font-mono text-[10px] font-semibold rounded-md px-1.5 py-0.5\",\n        dark\n          ? \"bg-white/10 text-white/70 border border-white/10\"\n          : \"bg-neutral-100 text-neutral-500 border border-neutral-200\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </kbd>\n  );\n}\n\nexport { MenuShortcut };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

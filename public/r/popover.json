@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "dependencies": [
+    "@radix-ui/react-popover",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/ui/popover.tsx",
+      "content": "import * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst popoverContentVariants = cva(\n  \"z-50 w-72 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-popover-content-transform-origin)\",\n  {\n    variants: {\n      variant: {\n        default: \"rounded-2xl border bg-popover p-4 text-popover-foreground shadow-card-md\",\n        dark: \"rounded-2xl border border-white/5 bg-brand-ink p-0 text-white shadow-card-dark\",\n      },\n    },\n    defaultVariants: { variant: \"default\" },\n  },\n);\n\nconst Popover = PopoverPrimitive.Root;\nconst PopoverTrigger = PopoverPrimitive.Trigger;\nconst PopoverAnchor = PopoverPrimitive.Anchor;\n\nexport interface PopoverContentProps\n  extends React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>,\n    VariantProps<typeof popoverContentVariants> {}\n\nconst PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  PopoverContentProps\n>(({ className, variant, align = \"center\", sideOffset = 4, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(popoverContentVariants({ variant }), className)}\n      {...props}\n    />\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = PopoverPrimitive.Content.displayName;\n\nexport { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, popoverContentVariants };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

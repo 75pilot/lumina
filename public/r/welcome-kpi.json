@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "welcome-kpi",
+  "type": "registry:block",
+  "title": "Welcome Kpi",
+  "dependencies": [
+    "lucide-react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils",
+    "kpi-pill",
+    "stat-figure"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/blocks/welcome-kpi.tsx",
+      "content": "import type { LucideIcon } from \"lucide-react\";\nimport { KpiPill } from \"@/components/ui/kpi-pill\";\nimport { StatFigure } from \"@/components/ui/stat-figure\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface WelcomeKpiItem {\n  label: string;\n  pct: number;\n  variant: \"dark\" | \"yellow\" | \"striped\" | \"outline\";\n}\n\nexport interface WelcomeStatItem {\n  icon: LucideIcon;\n  value: string;\n  label: string;\n}\n\nexport interface WelcomeKpiProps {\n  title: string;\n  kpis: WelcomeKpiItem[];\n  stats: WelcomeStatItem[];\n  className?: string;\n}\n\nfunction WelcomeKpi({ title, kpis, stats, className }: WelcomeKpiProps) {\n  return (\n    <section className={cn(\"space-y-6 pt-2 sm:pt-4\", className)}>\n      <h1 className=\"font-display text-4xl font-black tracking-tight text-neutral-900 sm:text-5xl md:text-6xl\">\n        {title}\n      </h1>\n\n      <div className=\"flex flex-wrap items-end justify-between gap-8\">\n        <div className=\"flex flex-wrap items-end gap-4 sm:gap-6\">\n          {kpis.map((kpi) => (\n            <div key={kpi.label} className=\"flex flex-col gap-2\">\n              <span className=\"text-xs font-medium text-neutral-500\">{kpi.label}</span>\n              <KpiPill pct={kpi.pct} variant={kpi.variant} />\n            </div>\n          ))}\n        </div>\n\n        <div className=\"flex flex-wrap items-end gap-6 sm:gap-8\">\n          {stats.map((stat) => (\n            <StatFigure key={stat.label} icon={stat.icon} value={stat.value} label={stat.label} />\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n\nexport { WelcomeKpi };\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "registry/lumina/ui/kpi-pill.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst kpiPillVariants = cva(\n  \"relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-2.5 text-sm font-semibold min-w-[88px]\",\n  {\n    variants: {\n      variant: {\n        dark: \"bg-neutral-200 text-white\",\n        yellow: \"bg-brand-yellow-lt text-neutral-900\",\n        striped: \"min-w-[280px] border border-neutral-300 bg-white text-neutral-600\",\n        outline: \"border border-neutral-300 bg-transparent text-neutral-600\",\n      },\n    },\n    defaultVariants: {\n      variant: \"dark\",\n    },\n  },\n);\n\nexport interface KpiPillProps\n  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof kpiPillVariants> {\n  pct: number;\n}\n\nfunction KpiPill({ className, variant, pct, ...props }: KpiPillProps) {\n  const label = `${pct}%`;\n\n  if (variant === \"striped\") {\n    return (\n      <span\n        className={cn(kpiPillVariants({ variant }), className)}\n        aria-label={`${pct}% — Project time`}\n        {...props}\n      >\n        <span\n          className=\"absolute inset-y-0 left-0 animate-kpi-fill\"\n          style={{\n            width: `${pct}%`,\n            backgroundImage: \"repeating-linear-gradient(135deg, #fff 0 8px, #e8e8e8 8px 10px)\",\n          }}\n        />\n        <span className=\"relative\">{label}</span>\n      </span>\n    );\n  }\n\n  const fillBg =\n    variant === \"dark\"\n      ? \"bg-neutral-900\"\n      : variant === \"yellow\"\n        ? \"bg-primary\"\n        : \"bg-neutral-200\";\n\n  return (\n    <span className={cn(kpiPillVariants({ variant }), className)} aria-label={label} {...props}>\n      <span\n        className={cn(\"absolute inset-y-0 left-0 animate-kpi-fill\", fillBg)}\n        style={{ width: `${pct}%` }}\n      />\n      <span className=\"relative\">{label}</span>\n    </span>\n  );\n}\n\nexport { KpiPill, kpiPillVariants };\n",
+      "type": "registry:ui",
+      "target": ""
+    },
+    {
+      "path": "registry/lumina/ui/stat-figure.tsx",
+      "content": "import * as React from \"react\";\nimport type { LucideIcon } from \"lucide-react\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface StatFigureProps {\n  icon: LucideIcon;\n  value: string;\n  label: string;\n  className?: string;\n}\n\nfunction StatFigure({ icon: Icon, value, label, className }: StatFigureProps) {\n  return (\n    <div className={cn(\"flex flex-col items-start\", className)}>\n      <div className=\"flex items-center gap-3\">\n        <span className=\"flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300\">\n          <Icon className=\"h-4 w-4 text-neutral-600\" strokeWidth={1.5} />\n        </span>\n        <span className=\"text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl\">{value}</span>\n      </div>\n      <span className=\"ml-12 text-xs font-medium text-muted-foreground\">{label}</span>\n    </div>\n  );\n}\n\nexport { StatFigure };\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

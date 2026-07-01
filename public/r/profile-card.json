@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "profile-card",
+  "type": "registry:block",
+  "title": "Profile Card",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/blocks/profile-card.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport interface ProfileCardProps {\n  image: string;\n  name: string;\n  role: string;\n  tag: string;\n  imageAlt?: string;\n  className?: string;\n}\n\nfunction ProfileCard({ image, name, role, tag, imageAlt, className }: ProfileCardProps) {\n  return (\n    <article\n      className={cn(\n        \"relative aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-200 shadow-card transition-shadow hover:shadow-card-md\",\n        className,\n      )}\n    >\n      <img\n        src={image}\n        alt={imageAlt ?? name}\n        className=\"absolute inset-0 h-full w-full object-cover\"\n        width={1024}\n        height={1024}\n      />\n      <div className=\"absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/40 to-transparent p-5\">\n        <div>\n          <h3 className=\"text-xl font-semibold text-white drop-shadow\">{name}</h3>\n          <p className=\"text-sm text-white/80\">{role}</p>\n        </div>\n        <span className=\"inline-flex items-center rounded-full border border-white/60 bg-white/20 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur\">\n          {tag}\n        </span>\n      </div>\n    </article>\n  );\n}\n\nexport { ProfileCard };\n",
+      "type": "registry:block"
+    }
+  ]
+}

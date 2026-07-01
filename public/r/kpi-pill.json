@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kpi-pill",
+  "type": "registry:ui",
+  "title": "Kpi Pill",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/ui/kpi-pill.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst kpiPillVariants = cva(\n  \"relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-2.5 text-sm font-semibold min-w-[88px]\",\n  {\n    variants: {\n      variant: {\n        dark: \"bg-neutral-200 text-white\",\n        yellow: \"bg-brand-yellow-lt text-neutral-900\",\n        striped: \"min-w-[280px] border border-neutral-300 bg-white text-neutral-600\",\n        outline: \"border border-neutral-300 bg-transparent text-neutral-600\",\n      },\n    },\n    defaultVariants: {\n      variant: \"dark\",\n    },\n  },\n);\n\nexport interface KpiPillProps\n  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof kpiPillVariants> {\n  pct: number;\n}\n\nfunction KpiPill({ className, variant, pct, ...props }: KpiPillProps) {\n  const label = `${pct}%`;\n\n  if (variant === \"striped\") {\n    return (\n      <span\n        className={cn(kpiPillVariants({ variant }), className)}\n        aria-label={`${pct}% — Project time`}\n        {...props}\n      >\n        <span\n          className=\"absolute inset-y-0 left-0 animate-kpi-fill\"\n          style={{\n            width: `${pct}%`,\n            backgroundImage: \"repeating-linear-gradient(135deg, #fff 0 8px, #e8e8e8 8px 10px)\",\n          }}\n        />\n        <span className=\"relative\">{label}</span>\n      </span>\n    );\n  }\n\n  const fillBg =\n    variant === \"dark\"\n      ? \"bg-neutral-900\"\n      : variant === \"yellow\"\n        ? \"bg-primary\"\n        : \"bg-neutral-200\";\n\n  return (\n    <span className={cn(kpiPillVariants({ variant }), className)} aria-label={label} {...props}>\n      <span\n        className={cn(\"absolute inset-y-0 left-0 animate-kpi-fill\", fillBg)}\n        style={{ width: `${pct}%` }}\n      />\n      <span className=\"relative\">{label}</span>\n    </span>\n  );\n}\n\nexport { KpiPill, kpiPillVariants };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

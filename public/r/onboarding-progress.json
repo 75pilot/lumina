@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "onboarding-progress",
+  "type": "registry:block",
+  "title": "Onboarding Progress",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/blocks/onboarding-progress.tsx",
+      "content": "import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface OnboardingSegment {\n  pct: number;\n  label?: string;\n  fill: string;\n  trackBg?: string;\n  textClass?: string;\n}\n\nexport interface OnboardingProgressProps {\n  title?: string;\n  percent: number;\n  segments: OnboardingSegment[];\n  className?: string;\n}\n\nfunction OnboardingProgress({\n  title = \"Onboarding\",\n  percent,\n  segments,\n  className,\n}: OnboardingProgressProps) {\n  return (\n    <Card variant=\"elevated\" className={cn(\"flex flex-col gap-4 p-5\", className)}>\n      <CardHeader\n        className=\"p-0\"\n        action={<span className=\"text-2xl font-bold text-neutral-900\">{percent}%</span>}\n      >\n        <CardTitle>{title}</CardTitle>\n      </CardHeader>\n\n      <CardContent className=\"grid grid-cols-3 gap-2 p-0\">\n        {segments.map((segment, i) => (\n          <div key={i} className=\"flex flex-col gap-2\">\n            <span\n              className={cn(\n                \"text-xs font-medium\",\n                segment.pct > 0 ? \"text-neutral-900\" : \"text-neutral-400\",\n              )}\n            >\n              {segment.pct}%\n            </span>\n            <div\n              className={cn(\n                \"relative flex h-12 items-center overflow-hidden rounded-full px-3\",\n                segment.trackBg ?? \"bg-neutral-100\",\n              )}\n            >\n              <div\n                className={cn(\"absolute inset-y-0 left-0 transition-all duration-500\", segment.fill)}\n                style={{ width: `${segment.pct}%` }}\n              />\n              {segment.label && (\n                <span className={cn(\"relative text-xs font-medium\", segment.textClass ?? \"text-neutral-900\")}>\n                  {segment.label}\n                </span>\n              )}\n            </div>\n          </div>\n        ))}\n      </CardContent>\n    </Card>\n  );\n}\n\nexport { OnboardingProgress };\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "registry/lumina/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst cardVariants = cva(\"text-card-foreground transition-shadow\", {\n  variants: {\n    variant: {\n      default: \"rounded-3xl border bg-card shadow-card\",\n      elevated: \"rounded-3xl border bg-card shadow-card hover:shadow-card-md\",\n      dark: \"rounded-3xl border border-white/5 bg-brand-ink text-card-dark-foreground shadow-card-dark\",\n      glass: \"rounded-3xl border border-white/40 bg-white/60 backdrop-blur shadow-card\",\n    },\n  },\n  defaultVariants: { variant: \"default\" },\n});\n\nexport interface CardProps\n  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}\n\nconst Card = React.forwardRef<HTMLDivElement, CardProps>(\n  ({ className, variant, ...props }, ref) => (\n    <div ref={ref} className={cn(cardVariants({ variant }), className)} {...props} />\n  ),\n);\nCard.displayName = \"Card\";\n\nconst CardHeader = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & { action?: React.ReactNode }\n>(({ className, action, children, ...props }, ref) => (\n  <div ref={ref} className={cn(\"flex items-center justify-between p-5 pb-0\", className)} {...props}>\n    <div className=\"flex flex-col space-y-1.5\">{children}</div>\n    {action}\n  </div>\n));\nCardHeader.displayName = \"CardHeader\";\n\nconst CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-lg font-semibold leading-none tracking-tight\", className)} {...props} />\n  ),\n);\nCardTitle.displayName = \"CardTitle\";\n\nconst CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"text-sm text-muted-foreground\", className)} {...props} />\n  ),\n);\nCardDescription.displayName = \"CardDescription\";\n\nconst CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"p-5 pt-0\", className)} {...props} />\n  ),\n);\nCardContent.displayName = \"CardContent\";\n\nconst CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"flex items-center p-5 pt-0\", className)} {...props} />\n  ),\n);\nCardFooter.displayName = \"CardFooter\";\n\nexport { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, cardVariants };\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

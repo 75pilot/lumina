@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-stack",
+  "type": "registry:ui",
+  "title": "Avatar Stack",
+  "dependencies": [
+    "@radix-ui/react-avatar"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/lumina/ui/avatar-stack.tsx",
+      "content": "import * as React from \"react\";\n\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AvatarStackProps {\n  avatars: Array<{ src?: string; alt: string; fallback: string }>;\n  className?: string;\n  size?: \"sm\" | \"md\";\n}\n\nfunction AvatarStack({ avatars, className, size = \"sm\" }: AvatarStackProps) {\n  const sizeClass = size === \"sm\" ? \"h-6 w-6\" : \"h-8 w-8\";\n  return (\n    <div className={cn(\"flex -space-x-2 shrink-0\", className)}>\n      {avatars.map((a, i) => (\n        <Avatar key={i} className={cn(sizeClass, \"border-2 border-white\")}>\n          {a.src ? <AvatarImage src={a.src} alt={a.alt} /> : null}\n          <AvatarFallback className=\"text-[10px]\">{a.fallback}</AvatarFallback>\n        </Avatar>\n      ))}\n    </div>\n  );\n}\n\nexport { AvatarStack };\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/lumina/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\", className)}\n    {...props}\n  />\n));\nAvatar.displayName = AvatarPrimitive.Root.displayName;\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n));\nAvatarImage.displayName = AvatarPrimitive.Image.displayName;\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full bg-muted\",\n      className,\n    )}\n    {...props}\n  />\n));\nAvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}
